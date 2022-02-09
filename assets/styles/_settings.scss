@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://use.typekit.net/zlp5uaz.css");
+
+$font-1: 'Roboto', sans-serif;
+$font-2: 'Muli', sans-serif;
+
+$color-1: #2E3244;
+$color-2: #516079;
+$color-3: #C5C6C6;
+$color-4: #F1895C;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    width: 100vw;
+}
+
+#root{
+    max-width: 1290px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body{
+    font-family: $font-2;
+    font-style: normal;
+    background-color: lightgray;
+}
+
+li{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+}
+
+a:hover{
+    color: $color-4
+}
+
+.content{
+    max-width: 1290px;
+}
+
+label{
+    display: inline-block;
+}
+
+.errorMessage{
+    text-align: center;
+    border: 1px solid $color-1;
+    padding: 10px;
+    color: $color-4;
+    margin: 20px;
+    border-radius: 4px;
+    background-color: $color-2;
+    width: auto;
+}

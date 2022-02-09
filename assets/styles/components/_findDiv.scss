@@ -1,0 +1,94 @@
+#findDiv{
+    width: 100%;
+    select{
+        width: 100px;
+        height: 25px;
+        margin-bottom: 8px;
+    }
+    #findInput{
+        width: 200px;
+
+    }
+    svg{
+        position: relative;
+        top: 5px;
+    }
+    .filters{
+        padding: 15px;
+        padding-bottom: 0;
+        padding-top: 0;
+        display: flex;
+        flex-direction: column;
+        max-height: 0;
+        transition: all 0.2s ease-out;
+        overflow: hidden;
+        border: 1px solid $color-1;
+    }
+    .filters.active{
+        padding-bottom: 15px;
+        padding-top: 15px;
+        max-height: 500px;
+        transition: all 0.2s ease-in;
+    }
+    #checkbox label{
+        width: 85px;
+        margin: 3px;
+    }
+    .resetButton{
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        margin-left: 5px;
+    }
+
+    .flexRow{
+        padding: 5px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        input{
+            height: 28px;
+            // width: 175px;
+        }
+        label{
+            position: relative;
+            top: -4px;
+            width:30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 3px;
+        }
+    }
+    .fieldset{
+        width: 100%;
+        // padding: 5px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+
+    }
+    .filters{
+        display: flex;
+        flex-direction: column;
+        label{
+            margin: 10px;
+        }
+        input{
+            margin: 5px;
+        }
+    }
+    .selectFilters{
+        display: flex;
+    }
+
+    @media screen and (min-width: 1200px) {
+        fieldset{
+            display: flex;
+            flex-direction: column;
+            #findInput{
+                width: 200px;
+            }
+        }
+    }
+}

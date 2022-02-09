@@ -1,0 +1,12 @@
+.dropdownLinks{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid $color-1;
+    border-radius: 4px;
+    &:hover{
+        background-color: $color-1;
+    }
+}
+.dropdownLinks.active{
+    background-color: $color-1;
+}

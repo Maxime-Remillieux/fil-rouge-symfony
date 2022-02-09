@@ -1,0 +1,48 @@
+.interface {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: flex-start;
+    color: white;
+    background-color: #516079;
+    padding: 10px;
+    font-size: 0.8em;
+
+
+    button{
+        padding: 5px;
+    }
+    label{
+        margin: 5px;
+    }
+
+    // .addDiv{
+    //     input{
+    //         height: 25px;
+    //     }
+    //     label{
+    //         display: inline-block;
+    //         width: 100px;
+            
+    //     }
+    // }
+
+    h4{
+        margin: 10px;
+    }
+
+    @media screen and (min-width: 850px) {
+
+        fieldset{
+            display: flex;
+        }
+    }
+    @media screen and (min-width: 1200px) {
+        display: flex;
+        flex-direction: column;
+        width: 350px;
+        min-height: calc(100vh - 80px);
+    }
+}

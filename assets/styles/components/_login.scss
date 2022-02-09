@@ -1,0 +1,55 @@
+.login{
+    height: 400px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .error{
+        color: $color-4;
+    }
+    h1{
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    .loginForm{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .logFieldset{
+        border: 1px solid $color-1;
+        border-radius: 4px;
+        padding: 20px;
+        text-align: center;
+        background-color: $color-2;
+        color: white;
+        // box-shadow: 3px 3px 15px 2px #000000;
+        box-shadow: 3px 3px 3px 0px $color-1, 1px 1px 5px 1px $color-1;
+
+    }
+    label{
+        width: 80px;
+        text-align: right;
+        margin-right: 20px;
+    }
+    input{
+        height: 25px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    button{
+        margin-top: 15px;
+        height: 30px;
+        width: 120px;
+    }
+    .loading{
+        // height: calc(100vh - 80px);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+}

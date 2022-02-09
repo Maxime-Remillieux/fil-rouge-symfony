@@ -1,0 +1,40 @@
+.gestion{
+
+    .list{
+        padding: 5px;
+    }
+    h1{
+        text-align: center;
+        margin-top: 20px;
+    }
+    .loading{
+        height: calc(100vh - 80px);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+    @media screen and (min-width: 1200px){
+        // flex-direction: row;
+        display: grid;
+        grid-template-columns: 350px 1fr;
+    }
+    .entityForm{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: flex-start;
+    }
+}
+
+.newBook{
+    display: flex;
+    flex-direction: column;
+    // @media screen and (min-width: 1200px){
+    //     flex-direction: row;
+    // }
+}

@@ -1,0 +1,15 @@
+
+.home, .about, .notfound{
+    // text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .content{
+        max-width: 900px;
+    }
+    h1{
+        margin-top: 50px;
+        text-align: center;
+    }
+}

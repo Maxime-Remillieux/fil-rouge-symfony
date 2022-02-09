@@ -1,0 +1,27 @@
+.header{
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    height: 80px;
+    background-color: $color-1;
+    padding: 10px;
+    box-shadow: 3px 3px 3px 0px black, 1px 1px 5px 1px black;
+    i{
+        margin-right: 10px;
+    }
+
+    @media screen and (min-width: 951px) {
+        i{
+            display: none;
+        }
+    }
+
+    @media screen and (min-width: 1200px){
+        grid-column: span 2;
+    }
+}
