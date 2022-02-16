@@ -1,0 +1,36 @@
+.findBar{
+    align-items: center;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    input{
+        height: 28px;
+        // width: 175px;
+    }
+    label{
+        // position: relative;
+        // top: -4px;
+        width:30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px;
+    }
+    #findInput{
+        width: 200px;
+    
+    }
+    .resetButton{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5px;
+    }
+    // svg{
+    //     position: relative;
+    //     top: 5px;
+    // }
+}

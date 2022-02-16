@@ -9,6 +9,9 @@
         top: 8px;
         margin-right: 5px;
     }
+    .log{
+        width:20px;
+    }
     .active{
         &::after{
             content: "";
@@ -24,7 +27,7 @@
 
     @media screen and (max-width: 950px) {
         display: none;
-        i{
+        .burger{
             display: inline;
         }
     }

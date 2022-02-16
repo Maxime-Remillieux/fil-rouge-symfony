@@ -5,30 +5,18 @@
         height: 25px;
         margin-bottom: 8px;
     }
-    #findInput{
-        width: 200px;
 
-    }
-    svg{
-        position: relative;
-        top: 5px;
-    }
     .filters{
+        font-size: 0.8em;
         padding: 15px;
         padding-bottom: 0;
         padding-top: 0;
         display: flex;
         flex-direction: column;
-        max-height: 0;
-        transition: all 0.2s ease-out;
-        overflow: hidden;
-        border: 1px solid $color-1;
     }
     .filters.active{
         padding-bottom: 15px;
         padding-top: 15px;
-        max-height: 500px;
-        transition: all 0.2s ease-in;
     }
     #checkbox label{
         width: 85px;
@@ -69,6 +57,7 @@
 
     }
     .filters{
+        margin: 10px;
         display: flex;
         flex-direction: column;
         label{

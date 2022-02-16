@@ -36,14 +36,7 @@ const BookRow = (props) => {
                         <li><b>Paru le</b> {data.release_at}</li>
                         <li><b>Ajouté le</b> {data.added_at}</li>
                         <li><b>Thèmes</b>{
-
-                            data.themes.map((theme, i) => {
-                                if (i !== data.themes.length - 1) {
-                                    return (theme.name + ', ');
-                                } else {
-                                    return theme.name;
-                                }
-                            })
+                            data.themes.map(theme=>theme.name).join(', ')
                         }</li>
                     </ul>
                     <ul className="links">

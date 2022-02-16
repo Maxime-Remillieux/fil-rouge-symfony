@@ -6,7 +6,8 @@ namespace App\Controller\api;
 use Exception;
 use App\Entity\User;
 use DateTimeImmutable;
-use Doctrine\ORM\EntityManager;
+// use Doctrine\ORM\EntityManager;
+use App\Service\ResponseManager;
 use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,18 +20,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/api/user')]
 class UserController extends AbstractController
 {
+    private ResponseManager $rm;
+
+    public function __construct(ResponseManager $rm){
+        $this->rm = $rm;
+    }
+    
     #[Route('/', name: 'user')]
     public function getUsers(UserRepository $repo, Request $req): Response
     {
         $data = $req->toArray();
         $users = $repo->searchUsers($data);
-        return $this->sendResponse(json_encode($users));
+        return $this->rm->sendJSON($users);
     }
 
     #[Route('/show/{id}', name: 'user.show')]
     public function show(User $user): Response
     {
-        return $this->sendResponse(json_encode($user));
+        return $this->rm->sendJSON([$user]);
     }
 
     #[Route('/new', name: 'user.new', methods:['POST'])]
@@ -56,20 +63,10 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
             $this->sendMail($user, $clearPass, $mailer);
-            return $this->sendResponse(json_encode(['status'=> "OK", 'message'=> 'USER ADDED SUCCESSFULLY']));
+            return $this->rm->sendCreateResponse(true);
         }catch(Exception $e){
-            return $this->sendResponse(json_encode(['status'=> "ERROR", 'message'=>$e->getMessage()]));
+            return $this->rm->sendCreateResponse(false, $e);
         }
-    }
-
-    public function sendResponse($content){
-        $resp = new Response();
-        $resp->setContent($content);
-        $resp->setStatusCode(Response::HTTP_OK);
-
-        // sets a HTTP response header
-        $resp->headers->set('Content-Type', 'application/json');
-        return $resp;
     }
 
     private function sendMail(User $user, string $pass, MailerInterface $mailer){

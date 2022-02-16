@@ -1,0 +1,60 @@
+.bookBox{
+    background-color: whitesmoke;
+    display: flex;
+    border: 1px solid $color-1;
+    width: 430px;
+    margin: 5px;
+    border-radius: 4px;
+    img{
+        max-width: 130px;
+        transition: max-width 0.2s ease-out;
+        padding: 12px;
+        object-fit: contain;
+        // border: 2px solid $color-2;
+        border-radius: 2px;
+    }
+    .inactive{
+        max-width: 0;
+        padding: 0;
+        transition: max-width 0.2s ease-out;
+    }
+    li{
+        padding: 5px;
+    }
+    .bookData{
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        padding: 8px;
+        p{
+            // width: 248px;
+            font-size: 0.9em;
+            transition: max-height 0.2s ease-out;
+            max-height: 75px;
+            overflow: hidden;
+            // height: auto;
+        }
+        p.active{
+            transition: max-height 0.2s ease-in;
+            max-height: 400px;
+        }
+        svg{
+            margin-left: 8px;
+        }
+    }
+    .moreInfos{
+        cursor: pointer;
+        color: $color-2;
+        text-align: left;
+        &:hover{
+            color: $color-4;
+        }
+    }
+
+    @media screen and (max-width: 450px) {
+        width: auto;
+        max-width: 450px;
+    }
+}

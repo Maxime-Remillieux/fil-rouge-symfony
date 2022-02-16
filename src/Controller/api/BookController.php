@@ -9,12 +9,12 @@ use App\Entity\Author;
 use App\Entity\Collec;
 use DateTimeImmutable;
 use App\Entity\Publisher;
-use Doctrine\ORM\EntityManager;
 use App\Repository\BookRepository;
 use App\Repository\ThemeRepository;
 use App\Repository\AuthorRepository;
 use App\Repository\CollecRepository;
 use App\Repository\PublisherRepository;
+use App\Service\ResponseManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,18 +25,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/api/book')]
 class BookController extends AbstractController
 {
+    private ResponseManager $rm;
+
+    public function __construct(ResponseManager $rm){
+        $this->rm = $rm;
+    }
+
     #[Route('/', name: 'book')]
     public function getBooks(BookRepository $repo, Request $req): Response
     {
         $data = $req->toArray();
         $books = $repo->searchBooks($data);
-        return $this->sendResponse(json_encode($books));
+        return $this->rm->sendJSON($books);
     }
 
     #[Route('/show/{id}', name: 'book.show')]
     public function show(Book $book): Response
     {
-        return $this->sendResponse(json_encode($book));
+        return $this->rm->sendJSON($book);
     }
 
     #[Route('/new', name: 'book.new', methods:['POST'])]
@@ -44,7 +50,6 @@ class BookController extends AbstractController
     {
         /** @var UploadedFile $img */
         $img = $req->files->get('img');
-        // dump($img);
         $destination = $this->getParameter('kernel.project_dir').'/public/upload/books';
         $imgName = uniqid().'.'.$img->getClientOriginalExtension();
         $img->move($destination, $imgName);
@@ -108,27 +113,13 @@ class BookController extends AbstractController
         $book->setImg($imgName);
         $book->setResume($data['resume']);
 
-        // $em->persist($book);
-        // $em->flush();
         try{
             $em->persist($book);
             $em->flush();
-            return $this->sendResponse(json_encode(['status'=> "OK", 'message'=> 'BOOK ADDED SUCCESSFULLY']));
+            return $this->rm->sendCreateResponse(true);
         }catch(Exception $e){
-            return $this->sendResponse(json_encode(['status'=> "ERROR", 'message'=>$e->getMessage()]));
+            return $this->rm->sendCreateResponse(false, $e);
         }
-
-        return $this->sendResponse(json_encode($book));
-    }
-
-    public function sendResponse($content): Response{
-        $resp = new Response();
-        $resp->setContent($content);
-        $resp->setStatusCode(Response::HTTP_OK);
-
-        // sets a HTTP response header
-        $resp->headers->set('Content-Type', 'application/json');
-        return $resp;
     }
 
     //génère les codes des livres et utilisateurs

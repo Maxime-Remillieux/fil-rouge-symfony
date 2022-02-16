@@ -1,0 +1,22 @@
+.navButton{
+    display: flex;
+    text-align: center;
+    margin: 5px;
+    border: 1px solid black;
+    background-color: $color-1;
+    border-radius: 4px;
+    font-size: 0.8em;
+    align-items: center;
+    width: max-content;
+    height: max-content;
+    font-size: 0.9em;
+    a, .link{
+        display: flex;
+        align-items: center;
+        // align-content: center;
+        margin: auto;
+        padding: 8px;
+        // text-align: center;
+    }
+    
+}

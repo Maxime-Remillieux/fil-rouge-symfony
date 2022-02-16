@@ -14,9 +14,9 @@ $color-4: #F1895C;
     padding: 0;
     box-sizing: border-box;
 }
-html {
-    width: 100vw;
-}
+// html {
+//     // width: 100vw;
+// }
 
 #root{
     max-width: 1290px;
@@ -37,13 +37,13 @@ li{
     list-style-type: none;
 }
 
-a{
+a, .link{
     text-decoration: none;
     cursor: pointer;
     color: white;
 }
 
-a:hover{
+a:hover, .link:hover{
     color: $color-4
 }
 
@@ -64,4 +64,13 @@ label{
     border-radius: 4px;
     background-color: $color-2;
     width: auto;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+.flex-row{
+    display: flex;
+    flex-direction: row;
 }

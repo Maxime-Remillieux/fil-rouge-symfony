@@ -2,9 +2,8 @@ import React from 'react';
 import { createContext, useEffect, useState } from 'react';
 import useFetch from "../hooks/database/useFetch";
 import Navbar from "./interface/Navbar";
-import BarWave from "react-cssfx-loading/lib/BarWave";
-import BouncingBalls from "react-cssfx-loading/lib/BouncingBalls";
 import { GestionInterface } from '../pages/PageData';
+import ReactLoading from "react-loading";
 // import { flattenObject, quickSortTab } from '../utils/Utils';
 
 export const NavContext = createContext({});
@@ -14,7 +13,6 @@ const getUrl = (entity)=>{
 }
 
 const GestionTable = ({ row: Row, entity}) => {
-    // const context = useContext(AppContext);
     const [loading, data, fetchError, setKeyword, setIsUpdating] = useFetch(getUrl(entity));
     // const [orderedData, setOrderedData] = useState([]);
     // const navigate = useNavigate();
@@ -23,14 +21,6 @@ const GestionTable = ({ row: Row, entity}) => {
         setKeyword: setKeyword,
         setIsUpdating: setIsUpdating
     });
-
-    // useEffect(() => {
-    //     if(fetchError === 'Expired JWT Token'){
-    //         context.setError('expiredToken');
-    //         context.logout();
-    //         navigate('/login');
-    //     }
-    // }, [fetchError, navigate]);
 
     // useEffect(() =>{
     //     setOrderedData(quickSortTab(data, 'code'));
@@ -44,7 +34,7 @@ const GestionTable = ({ row: Row, entity}) => {
             </NavContext.Provider>
             <div className="gestionContent">
                 <Navbar />
-                {loading &&<div className="loading"><BouncingBalls color='#516079' size="24px" />Hello</div>}
+                {loading &&<div className="loading"><ReactLoading type="bars" color='#516079'/></div>}
                 {!loading &&
                     <ul className="list">
                         {data.map(element => (

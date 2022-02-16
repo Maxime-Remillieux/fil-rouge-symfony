@@ -32,6 +32,9 @@ class Loan implements JsonSerializable
     #[ORM\Column(type: 'datetime_immutable')]
     private $return_at;
 
+    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'loans')]
+    private $current_order;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +111,18 @@ class Loan implements JsonSerializable
     public function setReturnAt(\DateTimeImmutable $return_at): self
     {
         $this->return_at = $return_at;
+
+        return $this;
+    }
+
+    public function getCurrentOrder(): ?Order
+    {
+        return $this->current_order;
+    }
+
+    public function setCurrentOrder(?Order $current_order): self
+    {
+        $this->current_order = $current_order;
 
         return $this;
     }

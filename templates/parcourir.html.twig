@@ -1,5 +1,16 @@
 {% extends "base.html.twig" %}
 
+{% block javascripts %}
+    {{ encore_entry_script_tags('browse') }}
+{% endblock %}
+
 {% block body %}
-    <h1>Parcourir les livres</h1>
+    <div id="browseBooks">
+        <div id="data-themes" style="display: none">
+            {{ themes }}
+        </div>
+        <div id="data-user" style="display: none">
+            {{ user }}
+        </div>
+    </div>
 {% endblock %}

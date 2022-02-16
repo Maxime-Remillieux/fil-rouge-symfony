@@ -1,12 +1,32 @@
-.dropdownLinks{
-    display: flex;
-    flex-direction: row;
-    border: 1px solid $color-1;
-    border-radius: 4px;
-    &:hover{
+.dropdown{
+    svg{
+        position: relative;
+        top: 9px;
+    }
+    .title{
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        border: 1px solid $color-1;
+        border-radius: 4px;
+        &:hover{
+            background-color: $color-1;
+        }
+    }
+    .title.active{
         background-color: $color-1;
     }
-}
-.dropdownLinks.active{
-    background-color: $color-1;
+    .content{
+        height: auto;
+        transition: height 0.2s ease-out;
+        border: 1px solid $color-1;
+        overflow: hidden;
+        border: 1px solid $color-1;
+        border-radius: 4px;
+
+    }
+    .content.active{
+        transition: height 0.2s ease-in;
+        // max-height: 300px;
+    }
 }

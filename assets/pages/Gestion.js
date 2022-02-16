@@ -15,6 +15,8 @@ import CollecForm from "../components/forms/CollecForm";
 import PublisherForm from "../components/forms/PublisherForm";
 import ThemeForm from "../components/forms/ThemeForm";
 import LoanForm from "../components/forms/LoanForm";
+import BookDetails from "./BookDetails";
+import OrderRow from "../components/rows/OrderRow";
 
 export const GestionContext = createContext();
 
@@ -31,28 +33,6 @@ const Gestion = () => {
             error: error
         }))
     }, [error])
-    // const { userConnected } = context.userState;
-    // const {setError} = context;
-    // const {isGranted} = context;
-    // const navigate = useNavigate();
-
-    // useEffect(() => {
-    //     if(!userConnected){
-    //         setError('noUser');
-    //         navigate('/login')
-    //     }else if (!isGranted('ROLE_ADMIN')){
-    //         setError('notGranted');
-    //         navigate('/');
-    //     }
-    // }, [userConnected, isGranted, navigate, setError]);
-
-
-
-    // if (!userConnected) return null;
-
-    // if (!isGranted('ROLE_ADMIN')) return null;
-
-
 
     return (
         <BrowserRouter>
@@ -62,6 +42,7 @@ const Gestion = () => {
                     <Route path="/gestion/livres" element={<GestionTable key="books" row={BookRow} entity={'book'}/>} />
                     <Route path="/gestion/users" element={<GestionTable key="users" row={UserRow} entity={'user'}/>} />
                     <Route path="/gestion/emprunts" element={<GestionTable key="loans" row={LoanRow} entity={'loan'}/>} />
+                    <Route path="/gestion/commandes" element={<GestionTable key="orders" row={OrderRow} entity={'order'}/>} />
                     <Route path="/gestion/livre/new" element={<New key="newBook" entity={'book'} pathName={'livre'} form={BookForm}/>} />
                     <Route path="/gestion/user/new" element={<New key="newUser" entity={'user'} pathName={'user'} form={UserForm} />} />
                     <Route path="/gestion/auteur/new" element={<New key="newAuthor" entity={'author'} pathName={'livre'} form={AuthorForm} />} />

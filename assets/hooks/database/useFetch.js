@@ -55,8 +55,8 @@ const useFetch = (url) => {
         clearTimer();
         createTimer(async () => {
             setState(s => ({ ...s, loading: true }));
-            console.log(requestData);
             try {
+
                 const result = await axios.post(url, requestData);
                 console.log(result.data);
                 setState(s => ({
@@ -92,7 +92,6 @@ export const useFetchApi = (url) => {
     })
 
     const fetchApi = async (reqData) => {
-        console.log(reqData);
         setState(s => ({ ...s, loading: true }));
         try {
             const result = await axios.post(url, reqData);
@@ -115,4 +114,72 @@ export const useFetchApi = (url) => {
     }
 
     return [state.data, state.fetchError, fetchApi, state.loading]
+}
+
+export const useFetchGet = (url) => {
+    const [state, setState] = useState({
+        loading: true,
+        data: [],
+        fetchError: ''
+    })
+
+    useEffect(async () => {
+        setState(s => ({ ...s, loading: true }));
+        try {
+            const result = await axios.get(url);
+            console.log(result.data);
+            setState(s => ({
+                data: result.data,
+                loading: false,
+                fetchError: ''
+            }));
+        } catch (error) {
+            console.log(error.response.data.message);
+            setState(s => ({
+                ...s,
+                loading: false,
+                fetchError: error.response.data.message
+            }));
+        }
+    }, [])
+
+    return [state.data, state.loading, state.fetchError];
+}
+
+export const useFetchCriteria = (url) => {
+    // const context = useContext(AppContext);
+    const [createTimer, clearTimer] = useTimeout();
+    const [requestData, setRequestData] = useState({});
+
+    const [state, setState] = useState({
+        loading: true,
+        data: [],
+        fetchError: ''
+    })
+
+    useEffect(() => {
+        clearTimer();
+        createTimer(async () => {
+            setState(s => ({ ...s, loading: true }));
+            try {
+                const result = await axios.post(url, requestData);
+                console.log(result.data);
+                setState(s => ({
+                    data: result.data,
+                    loading: false,
+                    fetchError: ''
+                }));
+            } catch (error) {
+                console.log(error.response.data.message);
+                setState(s => ({
+                    ...s,
+                    loading: false,
+                    fetchError: error.response.data.message
+                }));
+            }
+        }, 500);
+        return () => clearTimer();
+    }, [requestData , url])
+
+    return [state.loading, state.data, state.fetchError, setRequestData];
 }

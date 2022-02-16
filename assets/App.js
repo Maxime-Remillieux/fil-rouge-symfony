@@ -6,6 +6,7 @@
  */
 // any CSS you import will output into a single css file (app.css in this case)
 import "./styles/index.scss";
+require('@fortawesome/fontawesome-free/css/all.css');
 
 // start the Stimulus application
 import './bootstrap';

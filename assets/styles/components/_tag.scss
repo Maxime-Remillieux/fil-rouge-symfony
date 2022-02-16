@@ -1,0 +1,14 @@
+.tag{
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // align-content: center;
+    // padding: 5px;
+    border: 1px solid $color-1;
+    background-color: $color-4;
+    color: $color-1;
+    border-radius: 50%;
+    margin: 5px;
+}
