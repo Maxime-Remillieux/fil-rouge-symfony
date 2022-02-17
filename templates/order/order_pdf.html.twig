@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Récapitulatif de votre commande</title>
+    <style>
+        body{
+            font-family: Arial, Sans-Serif;
+        }
+        .cartRow{
+            border-bottom: 1px solid black;
+            list-style: none;
+            display: flex;
+            display: -webkit-box;
+            flex-direction: row;
+            padding: 5px;
+        }
+        .cartRow li{
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Récapitulatif de commande</h1>
+    <ul>
+        <li>Date : {{ data.date }}</li>
+        <li>Utilisateur: {{ data.user.firstname ~ ' ' ~ data.user.name }}</li>
+        <li>Email: {{ data.user.mail }}</li>
+    </ul>
+
+
+    {% for book in data.books %}
+        <ul class="cartRow">
+            <li><b>Code</b> {{ book.code }}</li>
+            <li><b>Titre</b> {{ book.title }}</li>
+            <li><b>Auteur</b> {{ book.author.firstname ~ ' ' ~ book.author.name }}</li>
+            <li><b>Éditeur</b> {{ book.publisher.name }}</li>
+        </ul>
+    {% endfor %}
+</body>
+</html>

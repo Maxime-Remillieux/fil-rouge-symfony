@@ -22,7 +22,7 @@ const LoanRow = (props) => {
                     <li><b>Nom usagé</b> {data.user.firstname + ' ' + data.user.name}</li>
                     <li><b>Titre</b> {data.book.title}</li>
                     <li><b>Statut</b> {data.status}</li>
-
+                    <li><b>ID Commande</b> {data.orderId}</li>
                 </ul>
             </div>
 
@@ -34,8 +34,8 @@ const LoanRow = (props) => {
                         <li><b>Code livre</b> {data.book.code}</li>
                     </ul>
                     <ul className="links">
-                        <li><a href="#">Modifer</a></li>
-                        <li><a href="#">Réservation</a></li>
+                        <li className='navButton'><a href="#">Modifer</a></li>
+                        <li className='navButton'><a href="#">Réservation</a></li>
                     </ul>
                 </div>
             </div>

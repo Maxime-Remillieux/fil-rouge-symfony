@@ -20,18 +20,6 @@
     div{
         width: auto;
     }
-    .links{
-        a{
-            color: white;
-            border: 1px solid grey;
-            padding: 5px;
-            border-radius: 4px;
-            background-color: $color-1;
-        }
-        a:hover{
-            color: $color-4;
-        }
-    }
 
     b{
         color: $color-4;
@@ -65,8 +53,10 @@
         flex-wrap: wrap;
 
         li{
+            justify-content: center;
+            align-items: center;
             width: 160px;
-            margin: 10px;
+            margin: 7px;
             display: flex;
             flex-direction: column;
         }

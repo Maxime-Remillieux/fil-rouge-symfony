@@ -15,7 +15,6 @@ import CollecForm from "../components/forms/CollecForm";
 import PublisherForm from "../components/forms/PublisherForm";
 import ThemeForm from "../components/forms/ThemeForm";
 import LoanForm from "../components/forms/LoanForm";
-import BookDetails from "./BookDetails";
 import OrderRow from "../components/rows/OrderRow";
 
 export const GestionContext = createContext();

@@ -22,6 +22,9 @@
         width: 85px;
         margin: 3px;
     }
+    #checkbox label{
+        vertical-align: top;
+    }
     .resetButton{
         width: 30px;
         height: 30px;
@@ -68,6 +71,7 @@
         }
     }
     .selectFilters{
+        font-size: 0.8em;
         display: flex;
     }
 

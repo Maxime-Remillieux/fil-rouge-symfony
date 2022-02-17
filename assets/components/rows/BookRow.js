@@ -40,9 +40,9 @@ const BookRow = (props) => {
                         }</li>
                     </ul>
                     <ul className="links">
-                        <li><a href={"/gestion/book/edit/" + data.id}>Modifer</a></li>
+                        <li className='navButton'><a href={"/gestion/book/edit/" + data.id}>Modifer</a></li>
                         {/* <li><a href="#">Retirer</a></li> */}
-                        <li><a href="#">Réservation</a></li>
+                        <li className='navButton'><a href="#">Réservation</a></li>
                     </ul>
                 </div>
             </div>

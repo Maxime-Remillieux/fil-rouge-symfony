@@ -7,7 +7,7 @@ const Navbar = () => {
             <NavLink exact="true" to="/gestion/home">Statistiques</NavLink>
             <NavLink exact="true" to="/gestion/livres">Livres</NavLink>
             <NavLink exact="true" to="/gestion/users">Utilisateurs</NavLink>
-            {/* <NavLink exact="true" to="/gestion/emprunts">Emprunts</NavLink> */}
+            <NavLink exact="true" to="/gestion/emprunts">Emprunts</NavLink>
             <NavLink exact="true" to="/gestion/commandes">Commandes</NavLink>
         </div>
     );

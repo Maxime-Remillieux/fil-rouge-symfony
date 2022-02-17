@@ -34,8 +34,8 @@ const UserRow = (props) => {
                         <li><b>Adresse</b> {data.adress} <br />{data.post_code} {data.city}</li>
                     </ul>
                     <ul className="links">
-                        <li><a href="#">Modifer</a></li>
-                        <li><a href="#">Réservation</a></li>
+                        <li className='navButton'><a href="#">Modifer</a></li>
+                        <li className='navButton'><a href="#">Réservation</a></li>
                     </ul>
                 </div>
             </div>

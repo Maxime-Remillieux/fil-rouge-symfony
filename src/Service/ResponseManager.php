@@ -25,15 +25,23 @@ class ResponseManager {
         if($success){
             return $this->sendJSON(["status"=>'OK', "message"=> $this->mm->getMessage('addSuccess')]);
         }else{
-            return $this->sendJSON(["status"=>'ERROR', "message"=> $this->mm->getError('addError'), "debugMessage"=>$err->getMessage()]);
+            return $this->sendJSON(["status"=>'ERROR', "message"=> $this->mm->getError('addError'), "debugMessage" => $err->getMessage()]);
         }
     }
 
-    public function newOrderResponse(bool $success, Exception $err = null){
+    public function newOrderResponse(bool $success = true, Exception $err = null){
         if($success){
             return $this->sendJSON(["status"=>'OK', "message"=> $this->mm->getMessage('newOrderSuccess')]);
         }else{
-            return $this->sendJSON(["status"=>'ERROR', "message"=> $this->mm->getError('newOrderError'), "debugMessage"=>$err->getMessage()]);
+            return $this->sendJSON(["status"=>'ERROR', "message"=> $this->mm->getError('newOrderError'), "debugMessage" => $err->getMessage()]);
+        }
+    }
+
+    public function updateResponse(string $type, Exception $err = null){
+        if($err){
+            return $this->sendJSON(["status"=>'ERROR', "message"=> $this->mm->getError($type.'Error'), "debugMessage"=>$err->getMessage()]);
+        }else{
+            return $this->sendJSON(["status"=>'OK', "message"=> $this->mm->getMessage($type.'Success')]);
         }
     }
 }

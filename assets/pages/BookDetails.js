@@ -24,6 +24,10 @@ const BookDetails = () => {
 
     return (
         <div className='bookDetails'>
+            <div className="navButton">
+                <NavLink exact="true" to="/parcourir">Retour à la liste</NavLink>
+                {/* <a href="http://localhost:8000/parcourir">Retour à la liste</a> */}
+            </div>
             {loading &&
                 <div className="loading">
                     <ReactLoading type="bars" color='#516079' />
@@ -31,10 +35,7 @@ const BookDetails = () => {
             }
             {!loading &&
                 <>
-                    <div className="navButton">
-                        <NavLink exact="true" to="/parcourir">Retour à la liste</NavLink>
-                        {/* <a href="http://localhost:8000/parcourir">Retour à la liste</a> */}
-                    </div>
+
                     <img src={"http://localhost:8000/upload/books/" + book.img} alt="image" />
                     <div className='flex-col'>
                         <div className="details">

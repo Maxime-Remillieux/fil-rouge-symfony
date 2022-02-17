@@ -110,8 +110,8 @@ class Order implements JsonSerializable
         return[
             "id"=> $this->getId(),
             "user"=> $this->getUser(),
-            "loans"=> $this->getLoans(),
-            "created_at"=> $this->getCreatedAt(),
+            "loans"=> $this->getLoans()->toArray(),
+            "created_at"=> $this->getCreatedAt()->format('Y-m-d'),
             "status"=> $this->getStatus()
         ];
     }

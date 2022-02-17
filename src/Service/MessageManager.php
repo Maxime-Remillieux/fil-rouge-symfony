@@ -13,11 +13,13 @@ class MessageManager {
             "fetchError" => "La ressource demandée est indisponible.",
             "addError" => "Une erreur est survenue lors de l'ajout.",
             "newOrderError" => "La réservation a échoué, veuillez réessayer.",
+            "updateError" => "Une erreur est survenue lors de la modification"
         ];
 
         $this->messages = [
             'addSuccess' => "Ajouté avec succès",
             'newOrderSuccess' => "Votre réservation est confirmée !",
+            'updateSuccess' => "Modifié avec succès"
         ];
     }
 

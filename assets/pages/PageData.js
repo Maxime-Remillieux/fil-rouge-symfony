@@ -25,6 +25,13 @@ const getSearchField = (entity) => {
         "user.name": "Nom usagé",
         "status": "Statut",
     };
+    const orderSearchFields = {
+        "o.id": "ID commande",
+        "b.title": "Titre",
+        "u.code": "ID usagé",
+        "u.name": "Nom usagé",
+        "o.status": "Statut",
+    };
 
     switch (entity) {
         case 'book':
@@ -33,6 +40,8 @@ const getSearchField = (entity) => {
             return userSearchFields;
         case 'loan':
             return loanSearchFields;
+        case 'order':
+            return orderSearchFields;
         default:
             return null;
     }
@@ -48,6 +57,11 @@ const getLinks = (entity) => {
     ];
     const loanLinks = [
         { text: 'Nouvel emprunt', path: '/gestion/emprunt/new' },
+        { text: 'Nouveau livre', path: '/gestion/livre/new' },
+        { text: 'Nouvel utilisateur', path: '/gestion/user/new' },
+    ];
+    const orderLinks = [
+        { text: 'Nouvelle commande', path: '/gestion/commande/new' },
         { text: 'Nouveau livre', path: '/gestion/livre/new' },
         { text: 'Nouvel utilisateur', path: '/gestion/user/new' },
     ];
@@ -68,6 +82,8 @@ const getLinks = (entity) => {
             return userLinks;
         case 'loan':
             return loanLinks;
+        case 'order':
+            return orderLinks;
         default:
             return null;
     }

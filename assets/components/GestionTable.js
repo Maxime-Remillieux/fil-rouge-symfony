@@ -30,8 +30,6 @@ const GestionTable = ({ row: Row, entity}) => {
         <div className="gestion">
             <NavContext.Provider value={navContext} >
             <GestionInterface entity={entity}/>
-            {/* <Interface content={interfaceContent}/> */}
-            </NavContext.Provider>
             <div className="gestionContent">
                 <Navbar />
                 {loading &&<div className="loading"><ReactLoading type="bars" color='#516079'/></div>}
@@ -39,10 +37,11 @@ const GestionTable = ({ row: Row, entity}) => {
                     <ul className="list">
                         {data.map(element => (
                             <Row data={element} key={element.id} />
-                        ))}
+                            ))}
                     </ul>
                 }
             </div>
+            </NavContext.Provider>
         </div>
     );
 };

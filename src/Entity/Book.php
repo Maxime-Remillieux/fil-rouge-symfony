@@ -49,7 +49,7 @@ class Book implements JsonSerializable
     #[ORM\ManyToMany(targetEntity: Theme::class, inversedBy: 'books')]
     private $themes;
 
-    #[ORM\OneToOne(mappedBy: 'book', targetEntity: Loan::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'book', targetEntity: Loan::class, cascade: ['persist', 'remove'])]
     private $loan;
 
 

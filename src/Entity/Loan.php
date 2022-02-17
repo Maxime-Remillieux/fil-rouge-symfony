@@ -15,7 +15,7 @@ class Loan implements JsonSerializable
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\OneToOne(inversedBy: 'loan', targetEntity: Book::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'loan', targetEntity: Book::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private $book;
 
@@ -70,7 +70,8 @@ class Loan implements JsonSerializable
             'id' => $this->getId(),
             'status' => $this->getStatus(),
             'user' => $this->getUser(),
-            'book' => $this->getBook()
+            'book' => $this->getBook(),
+            'orderId' => $this->getCurrentOrder()->getId()
         );
     }
 
