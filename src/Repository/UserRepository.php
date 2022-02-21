@@ -39,23 +39,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * @return User[] Returns an array of User objects
      */
-    public function searchUsers(?array $data = null) {
+    public function searchUsers(?array $data = null)
+    {
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
         $qb->select('u')
-        ->from('App\Entity\User', 'u');
+            ->from('App\Entity\User', 'u');
 
-        if($data != null){
+        if ($data != null) {
             $i = 1;
             foreach ($data as $key => $value) {
-                if($value != ""){
-                    if($i == 1){
+                if ($value != "") {
+                    if ($i == 1) {
                         $qb->where('u.' . $key . ' like ?' . $i);
-                    }else{
+                    } else {
                         $qb->orWhere('u.' . $key . ' like ?' . $i);
                     }
                     $qb->setParameter($i, '%' . $value . '%');
-                    $i++;                
+                    $i++;
                 }
             }
         }
@@ -64,6 +65,34 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $users = $query->getResult();
 
         return $users;
+    }
+
+    public function getTotalUsers()
+    {
+        $entityManager = $this->getEntityManager();
+        $qb = $entityManager->createQueryBuilder();
+
+        $qb->select('count(user.id)');
+        $qb->from('App\Entity\User', 'user');
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
+    }
+
+    public function getTotalUsersByRole($role)
+    {
+        $entityManager = $this->getEntityManager();
+        $qb = $entityManager->createQueryBuilder();
+
+        $qb->select('count(u.id)')
+        ->from('App\Entity\User', 'u')
+        ->andWhere('JSON_CONTAINS(u.roles, :role) = 1')
+        ->setParameter('role', '"' . $role . '"');
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
     }
 
     // /**

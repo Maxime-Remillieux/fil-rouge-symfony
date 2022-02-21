@@ -1,17 +1,18 @@
 .interface {
     width: 100%;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: flex-start;
-    align-content: flex-start;
+    align-items: center;
+    // align-content: flex-start;
     color: white;
     background-color: #516079;
     padding: 10px;
     // font-size: 0.8em;
     .navButton{
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
     button{
         padding: 5px;
@@ -33,6 +34,8 @@
     @media screen and (min-width: 1200px) {
         display: flex;
         flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
         width: 350px;
         // min-height: calc(100vh - 80px);
         height: 100vh;

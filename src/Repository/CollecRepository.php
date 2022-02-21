@@ -19,6 +19,19 @@ class CollecRepository extends ServiceEntityRepository
         parent::__construct($registry, Collec::class);
     }
 
+    public function getTotalCollections()
+    {
+        $entityManager = $this->getEntityManager();
+        $qb = $entityManager->createQueryBuilder();
+
+        $qb->select('count(collection.id)');
+        $qb->from('App\Entity\Collection', 'collection');
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
+    }
+
     // /**
     //  * @return Collec[] Returns an array of Collec objects
     //  */

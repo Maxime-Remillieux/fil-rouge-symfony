@@ -19,7 +19,7 @@ import OrderRow from "../components/rows/OrderRow";
 
 export const GestionContext = createContext();
 
-const Gestion = () => {
+const Gestion = ({stats}) => {
     const [error, setError] = useState('');
 
     const [context, setContext] = useState({
@@ -37,7 +37,7 @@ const Gestion = () => {
         <BrowserRouter>
             <GestionContext.Provider value ={context}>
                 <Routes>
-                    <Route path="/gestion/home" element={<GestionHome />} />
+                    <Route path="/gestion/home" element={<GestionHome stats={stats}/>} />
                     <Route path="/gestion/livres" element={<GestionTable key="books" row={BookRow} entity={'book'}/>} />
                     <Route path="/gestion/users" element={<GestionTable key="users" row={UserRow} entity={'user'}/>} />
                     <Route path="/gestion/emprunts" element={<GestionTable key="loans" row={LoanRow} entity={'loan'}/>} />

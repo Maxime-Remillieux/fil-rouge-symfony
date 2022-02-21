@@ -1,4 +1,11 @@
 .dropdown{
+    position: relative;
+    // display: flex;
+    // margin: auto;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    height: max-content;
     svg{
         position: relative;
         top: 9px;
@@ -17,16 +24,20 @@
         background-color: $color-1;
     }
     .content{
+        position: absolute;
+        z-index: 1;
+        background-color: $color-2;
         height: auto;
         transition: height 0.2s ease-out;
-        border: 1px solid $color-1;
         overflow: hidden;
-        border: 1px solid $color-1;
+        border: 0;
         border-radius: 4px;
-
+        // padding: 5px;
     }
     .content.active{
+        border: 1px solid $color-1;
         transition: height 0.2s ease-in;
+        padding: 5px;
         // max-height: 300px;
     }
 }

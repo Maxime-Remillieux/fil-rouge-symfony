@@ -51,4 +51,30 @@ class LoanRepository extends ServiceEntityRepository
         return $loans;
     }
 
+    public function getTotalLoans($criteria = null)
+    {
+        $entityManager = $this->getEntityManager();
+        $qb = $entityManager->createQueryBuilder();
+
+        $qb->select('count(l.id)');
+        $qb->from('App\Entity\Loan', 'l');
+
+        if($criteria != null){
+            $i = 1;
+            foreach ($criteria as $key => $value) {
+                if($i == 1){
+                    $qb->where('l.'.$key . ' = ?' . $i);
+                }else{
+                    $qb->orWhere('l.'.$key . ' = ?' . $i);
+                }
+                $qb->setParameter($i, $value);
+                $i++;
+            }
+        }
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
+    }
+
 }

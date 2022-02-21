@@ -2,7 +2,7 @@ import React from "react";
 import FindDiv from "../components/interface/FindDiv";
 import LinksDiv from "../components/interface/LinksDiv";
 
-const getSearchField = (entity) => {
+export const getSearchField = (entity) => {
     const booksSearchFields = {
         "b.code": "Code",
         "b.title": "Titre",
@@ -47,7 +47,7 @@ const getSearchField = (entity) => {
     }
 }
 
-const getLinks = (entity) => {
+export const getLinks = (entity) => {
     const bookLinks = [
         { text: 'Nouveau livre', path: '/gestion/livre/new' },
         { text: 'Nouvel auteur', path: '/gestion/auteur/new' },
@@ -71,6 +71,17 @@ const getLinks = (entity) => {
         { text: 'Nouvel emprunt', path: '/gestion/emprunt/new' }
     ];
 
+    const defaultLinks =[
+        { text: 'Nouveau livre', path: '/gestion/livre/new' },
+        { text: 'Nouvel auteur', path: '/gestion/auteur/new' },
+        { text: 'Nouvel éditeur', path: '/gestion/editeur/new' },
+        { text: 'Nouvelle collection', path: '/gestion/collection/new' },
+        { text: 'Nouveau thème', path: '/gestion/theme/new' },
+        { text: 'Nouvelle commande', path: '/gestion/commande/new' },
+        { text: 'Nouveau livre', path: '/gestion/livre/new' },
+        { text: 'Nouvel utilisateur', path: '/gestion/user/new' },
+    ] 
+
     switch (entity) {
         case 'book':
         case 'author':
@@ -85,7 +96,7 @@ const getLinks = (entity) => {
         case 'order':
             return orderLinks;
         default:
-            return null;
+            return defaultLinks;
     }
 }
 

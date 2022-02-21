@@ -22,13 +22,13 @@ class OrderRepository extends ServiceEntityRepository
     /**
      * @return Order[] Returns an array of Order objects
      */
-    public function searchOrders($data = null){
+    public function searchOrders($data = null) {
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
         $qb->select('o')
         ->from('App\Entity\Order', 'o');
 
-        if($data != null){
+        if($data != null) {
             $qb->join('o.user', 'u')
             ->join('o.loans', 'l')
             ->join('l.book', 'b');
@@ -36,11 +36,11 @@ class OrderRepository extends ServiceEntityRepository
             $i = 1;
             foreach ($data as $key => $value) {
                 if($i == 1){
-                    $qb->where($key . ' like ?' . $i);
+                    $qb->where('o.' . $key . ' = ?' . $i);
                 }else{
-                    $qb->orWhere($key . ' like ?' . $i);
+                    $qb->orWhere('o.' . $key . ' = ?' . $i);
                 }
-                $qb->setParameter($i, '%' . $value . '%');
+                $qb->setParameter($i, $value);
                 $i++;
             }
         }
@@ -49,6 +49,32 @@ class OrderRepository extends ServiceEntityRepository
         $orders = $query->getResult();
 
         return $orders;
+    }
+
+    public function getTotalOrders($criteria = null)
+    {
+        $entityManager = $this->getEntityManager();
+        $qb = $entityManager->createQueryBuilder();
+
+        $qb->select('count(o.id)');
+        $qb->from('App\Entity\Order', 'o');
+
+        if($criteria != null){
+            $i = 1;
+            foreach ($criteria as $key => $value) {
+                if($i === 1){
+                    $qb->where('o.' . $key . ' = ?' . $i);
+                }else{
+                    $qb->orWhere('o.'.$key . ' = ?' . $i);
+                }
+                $qb->setParameter($i, $value);
+                $i++;
+            }
+        }
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
     }
     /*
     public function findByExampleField($value)

@@ -17,7 +17,6 @@ function compareDate(a, b) {
 }
 
 const BrowseBooks = ({ themes }) => {
-    // const [newBooks, setNewBooks] = useState([]);
     const [keyword, setKeyword] = useState('');
     const [loading, data, fetchError, setRequestData] = useFetchCriteria('http://localhost:8000/api/book/');
     const context = useContext(BrowseContext);
@@ -59,7 +58,7 @@ const BrowseBooks = ({ themes }) => {
                     </select>
                 </div>
                 <div className='navButton'>
-                    <NavLink to='/parcourir/panier'>{cart.length > 0 ? 'Afficher votre panier' : "Panier vide"} {cart.length > 0 && <div className='tag'>{cart.length}</div>} </NavLink>
+                    <NavLink to='/parcourir/panier'>{cart.length > 0 ? 'Panier' : "Panier vide"} {cart.length > 0 && <div className='tag'>{cart.length}</div>} </NavLink>
                 </div>
             </div>
             {loading &&
@@ -69,7 +68,6 @@ const BrowseBooks = ({ themes }) => {
             }
             {!loading &&
                 <div id="browseMain" className='content'>
-                    <h2>Parcourir les livres</h2>
                     <ul id="booksDiv" >
                         {!loading &&
                             data.map(book => (

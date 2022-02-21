@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\api;
+namespace App\Controller\Api;
 
 use App\Entity\Collec;
 use App\Repository\CollecRepository;

@@ -4,6 +4,8 @@ import useFetch from "../hooks/database/useFetch";
 import Navbar from "./interface/Navbar";
 import { GestionInterface } from '../pages/PageData';
 import ReactLoading from "react-loading";
+import FindDiv from './interface/FindDiv';
+import LinksDiv from './interface/LinksDiv';
 // import { flattenObject, quickSortTab } from '../utils/Utils';
 
 export const NavContext = createContext({});
@@ -29,7 +31,10 @@ const GestionTable = ({ row: Row, entity}) => {
     return (
         <div className="gestion">
             <NavContext.Provider value={navContext} >
-            <GestionInterface entity={entity}/>
+            <div className="interface">
+                <FindDiv entity={entity}/>
+                <LinksDiv entity={entity}/>
+            </div>
             <div className="gestionContent">
                 <Navbar />
                 {loading &&<div className="loading"><ReactLoading type="bars" color='#516079'/></div>}

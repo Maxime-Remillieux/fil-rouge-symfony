@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { IoIosArrowUp } from "react-icons/io"
 import { IoIosArrowDown } from "react-icons/io"
+import { FaUserPlus } from "react-icons/fa"
 
 const Dropdown = ({children, title}) => {
-    const [focus, setFocus] = useState(true);
+    const [focus, setFocus] = useState(false);
     const contentRef = useRef();
 
     useEffect(()=>{

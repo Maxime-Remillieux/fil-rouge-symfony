@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\api;
+namespace App\Controller\Api;
 
 use Exception;
 use App\Entity\Author;
@@ -24,8 +24,7 @@ class AuthorController extends AbstractController
     #[Route('/', name: 'author')]
     public function index(AuthorRepository $repo, Request $req): Response
     {
-        // $data = json_decode($req);
-        $data = json_decode($req->request->get('data'), true);
+        $data = $req->toArray();
         $authors = $repo->searchAuthors($data);
         return $this->rm->sendJSON($authors);
     }

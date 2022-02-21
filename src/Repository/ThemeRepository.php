@@ -18,6 +18,19 @@ class ThemeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Theme::class);
     }
+    
+    public function getTotalThemes()
+    {
+        $entityManager = $this->getEntityManager();
+        $qb = $entityManager->createQueryBuilder();
+
+        $qb->select('count(theme.id)');
+        $qb->from('App\Entity\Theme', 'theme');
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
+    }
 
     // /**
     //  * @return Theme[] Returns an array of Theme objects

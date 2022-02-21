@@ -38,7 +38,7 @@ const OrderRow = (props) => {
         <li className={"row"} data-focus={ focus } onClick={ toggleFocus }>
             <div className="data-main">
                 <ul>
-                    <li><b>ID commande</b> {data.id}</li>
+                    <li><b>#</b> {data.id}</li>
                     <li><b>Nom usagé</b> {data.user.firstname + ' ' + data.user.name}</li>
                     <li><b>Date de création</b> {data.created_at}</li>
                     <li><b>Statut</b> {data.status}</li>

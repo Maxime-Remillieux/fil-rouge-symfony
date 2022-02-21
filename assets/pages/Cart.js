@@ -14,7 +14,12 @@ const Cart = () => {
         data.user = connectedUser;
         const response = await axios.post("http://localhost:8000/api/order/new", data);
         alert(response.data.message);
-        console.log(response.data.debugMessage);
+
+        if(response.data.status === "OK"){
+            clearCart();
+        }else{
+            console.log(response.data.debugMessage);
+        }
     }
 
     return (

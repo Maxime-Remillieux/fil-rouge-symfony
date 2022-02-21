@@ -278,7 +278,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JsonSer
             }
         }
 
-
         return array(
             'id' => $this->getId(),
             'code' => $this->getCode(),

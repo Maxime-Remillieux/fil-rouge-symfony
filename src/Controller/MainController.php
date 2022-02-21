@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\ThemeRepository;
 use DateTimeImmutable;
 use App\Repository\UserRepository;
+use App\Service\DataService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,6 +34,7 @@ class MainController extends AbstractController {
     function new(): Response {
         return $this->render('/gestion.html.twig');
     }
+
     #[Route('/parcourir/{id}', name:"parcourir.show")]
     function show(ThemeRepository $themeRepo): Response {
         $themes = $themeRepo->findAll();

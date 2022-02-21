@@ -18,6 +18,19 @@ class PublisherRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Publisher::class);
     }
+    
+    public function getTotalPublishers()
+    {
+        $entityManager = $this->getEntityManager();
+        $qb = $entityManager->createQueryBuilder();
+
+        $qb->select('count(publisher.id)');
+        $qb->from('App\Entity\Publisher', 'publisher');
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
+    }
 
     // /**
     //  * @return Publisher[] Returns an array of Publisher objects

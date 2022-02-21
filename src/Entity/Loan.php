@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\LoanRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
 
@@ -15,7 +16,7 @@ class Loan implements JsonSerializable
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\ManyToOne(inversedBy: 'loan', targetEntity: Book::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'loans', targetEntity: Book::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private $book;
 
@@ -71,7 +72,10 @@ class Loan implements JsonSerializable
             'status' => $this->getStatus(),
             'user' => $this->getUser(),
             'book' => $this->getBook(),
-            'orderId' => $this->getCurrentOrder()->getId()
+            'orderId' => $this->getCurrentOrder()->getId(),
+            'createdAt' => $this->getCreateAt()->format('Y-m-d'),
+            'returnAt' => $this->getReturnAt()->format('Y-m-d'),
+            'isLate' => $this->isLate()
         );
     }
 
@@ -126,5 +130,21 @@ class Loan implements JsonSerializable
         $this->current_order = $current_order;
 
         return $this;
+    }
+
+    public function isActive(){
+        $status = $this->getStatus();
+        if($status === "reserved" || $status === 'out'){
+            return true;
+        }
+        return false;
+    }
+
+    public function isLate(){
+        $now = new DateTimeImmutable('now');
+        if($this->isActive() && $this->getReturnAt() < $now){
+            return true;
+        }
+        return false;
     }
 }

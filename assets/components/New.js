@@ -5,6 +5,7 @@ import { useEffect } from "react/cjs/react.development";
 // import { AppContext } from "../App";
 import { NewInterface } from "../pages/PageData";
 import { GestionContext } from "../pages/Gestion";
+import LinksDiv from "./interface/LinksDiv";
 
 
 const New = ({entity, pathName, form: Form}) => {
@@ -45,7 +46,10 @@ const New = ({entity, pathName, form: Form}) => {
     }
     return(
         <div className="gestion">
-            <NewInterface entity={entity}/>
+            {/* <NewInterface entity={entity}/> */}
+            <div className="interface">
+                <LinksDiv entity={entity}/>
+            </div>
             <div className="newBook">
                 <NavLink exact="true" to={"/gestion/" + pathName + 's'}>Retour</NavLink>
                 { context.error &&

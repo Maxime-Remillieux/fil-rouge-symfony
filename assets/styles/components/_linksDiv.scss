@@ -1,9 +1,6 @@
 .linksDiv{
-    width: 100%;
+    // width: 100%;
     ul{
-        // max-height: 0;
-        // transition: max-height 0.2s ease-out;
-        // border: 1px solid $color-1;
         display: flex;
         flex-direction: row;
         align-items: flex-start;
@@ -12,28 +9,28 @@
         // overflow: hidden;
 
     }
-    // ul.active{
-    //     transition: max-height 0.2s ease-in;
-    //     max-height: 300px;
-    // }
-    // ul
 
 
     font-size: 0.9rem;
-    li{
-        display: block;
-        margin: 5px;
-        width: 150px;
-        border: 1px solid black;
-        background-color: $color-1;
-        border-radius: 4px;
+
+    @media screen and (min-width: 1200px) {
+        width: 100%;
     }
-    a{
-        display: block;
-        margin: auto;
-        padding: 8px;
-        // width: 100%;
-        // height: 100%;
-        text-align: center;
-    }
+    // li{
+    //     display: block;
+    //     margin: 5px;
+    //     width: 150px;
+    //     border: 1px solid black;
+    //     background-color: $color-1;
+    //     border-radius: 4px;
+    // }
+
+    // a{
+    //     display: block;
+    //     margin: auto;
+    //     padding: 8px;
+    //     // width: 100%;
+    //     // height: 100%;
+    //     text-align: center;
+    // }
 }

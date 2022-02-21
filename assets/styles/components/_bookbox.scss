@@ -1,4 +1,5 @@
 .bookBox{
+    position: relative;
     background-color: whitesmoke;
     display: flex;
     border: 1px solid $color-1;
@@ -12,6 +13,21 @@
         object-fit: contain;
         // border: 2px solid $color-2;
         border-radius: 2px;
+    }
+    .dispo{
+        align-self: end;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        
+        .returnDate{
+            margin-top: 5px;
+            color: $color-2;
+            // position: relative;
+            font-size: 0.8em;
+            text-align: right;
+            // left: -33px;
+        }
     }
     .inactive{
         max-width: 0;
@@ -40,8 +56,10 @@
             transition: max-height 0.2s ease-in;
             max-height: 400px;
         }
-        svg{
-            margin-left: 8px;
+        .navButton{
+            svg{
+                margin-left: 8px;
+            }
         }
     }
     .moreInfos{

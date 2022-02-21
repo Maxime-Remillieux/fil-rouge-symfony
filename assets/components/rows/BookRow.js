@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { BsCircleFill } from "react-icons/bs";
 
 const BookRow = (props) => {
     const { data } = props;
@@ -15,6 +16,13 @@ const BookRow = (props) => {
         setFocus(!focus);
     }
 
+    const isBookAvailable = ()=>{
+        if(data.availablity === 'available'){
+            return true;
+        }
+        return false;
+    }
+
     return (
         <li className={"row"} data-focus={ focus } onClick={toggleFocus}>
             <div className="data-main">
@@ -23,13 +31,12 @@ const BookRow = (props) => {
                     <li><b>Titre</b> {data.title}</li>
                     <li><b>Auteur</b> {data.author.firstname + ' ' + data.author.name}</li>
                     <li><b>Éditeur</b> {data.publisher.name}</li>
+                    <li><BsCircleFill color={isBookAvailable() ? 'green':'red'}/></li>
                 </ul>
             </div>
 
             <div className={"data-sup" + (focus ? ' active' : '')}>
-                {/* <div> */}
-                    <img src={"http://localhost:8000/upload/books/" + data.img} alt="img" />
-                {/* </div> */}
+                <img src={"http://localhost:8000/upload/books/" + data.img} alt="img" />
                 <div className="data-sup-text">
                     <ul>
                         <li><b>Collection</b> {data.collection.name}</li>
@@ -41,7 +48,6 @@ const BookRow = (props) => {
                     </ul>
                     <ul className="links">
                         <li className='navButton'><a href={"/gestion/book/edit/" + data.id}>Modifer</a></li>
-                        {/* <li><a href="#">Retirer</a></li> */}
                         <li className='navButton'><a href="#">Réservation</a></li>
                     </ul>
                 </div>

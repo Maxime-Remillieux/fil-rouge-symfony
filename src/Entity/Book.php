@@ -49,8 +49,11 @@ class Book implements JsonSerializable
     #[ORM\ManyToMany(targetEntity: Theme::class, inversedBy: 'books')]
     private $themes;
 
+    // #[ORM\OneToMany(mappedBy: 'book', targetEntity: Loan::class, cascade: ['persist', 'remove'])]
+    // private $loan;
+
     #[ORM\OneToMany(mappedBy: 'book', targetEntity: Loan::class, cascade: ['persist', 'remove'])]
-    private $loan;
+    private $loans;
 
 
     public function __construct()
@@ -195,6 +198,62 @@ class Book implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return Collection|Loan[]
+     */
+    public function getLoans(): Collection{
+        return $this->loans;
+    }
+    public function addLoan(Loan $loan): self
+    {
+        if (!$this->loan->contains($loan)) {
+            $this->themes[] = $loan;
+        }
+
+        return $this;
+    }
+
+    public function removeLoan(Loan $loan): self
+    {
+        $this->loans->removeElement($loan);
+
+        return $this;
+    }
+
+    public function getStatus(){
+        $loans = $this->getLoans();
+        foreach ($loans as $loan) {
+            $status = $loan->getStatus();
+            if($status === 'reserved'){
+                return 'reserved';
+            }
+            if($status === 'out'){
+                return 'out';
+            }
+        }
+        return 'available';
+    }
+
+    public function isAvailable(){
+        $loans = $this->getLoans();
+
+        foreach ($loans as $loan) {
+            if($loan->isActive()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function getCurrentLoanReturnDate(){
+        $loans = $this->getLoans();
+        foreach ($loans as $loan) {
+            if($loan->isActive()){
+                return $loan->getReturnAt();
+            }
+        }
+    }
+
     public function toArray() {
         $themes = $this->getThemes();
         $themesArray = [];
@@ -202,7 +261,7 @@ class Book implements JsonSerializable
             $themesArray[] = $theme->toArray();
         }
 
-        return array(
+        $array = array(
             'id' => $this->getId(),
             'code' => $this->getCode(),
             'title' => $this->getTitle(),
@@ -213,24 +272,19 @@ class Book implements JsonSerializable
             'release_at' => $this->getReleaseAt()->format('Y-m-d'),
             'added_at' => $this->getAddedAt()->format('Y-m-d'),
             'img' => $this->getImg(),
-            'resume' => $this->getResume()
+            'resume' => $this->getResume(),
+            'availablity' => $this->getStatus()
         );
+
+        if(!$this->isAvailable()){
+            $array['return_at'] = $this->getCurrentLoanReturnDate()->format('Y-m-d');
+        }
+
+        return $array;
     }
 
     public function jsonSerialize(): mixed
     {
         return $this->toArray();
-    }
-
-    public function getLoan(): ?Loan
-    {
-        return $this->loan;
-    }
-
-    public function setLoan(?Loan $loan): self
-    {
-        $this->loan = $loan;
-
-        return $this;
     }
 }

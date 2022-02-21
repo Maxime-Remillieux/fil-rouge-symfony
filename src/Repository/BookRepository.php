@@ -50,4 +50,17 @@ class BookRepository extends ServiceEntityRepository
 
         return $livres;
     }
+
+    public function getTotalBooks()
+    {
+        $entityManager = $this->getEntityManager();
+        $qb = $entityManager->createQueryBuilder();
+
+        $qb->select('count(book.id)');
+        $qb->from('App\Entity\Book', 'book');
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
+    }
 }

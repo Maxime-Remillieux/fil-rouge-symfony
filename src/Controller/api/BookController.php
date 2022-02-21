@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\api;
+namespace App\Controller\Api;
 
 use Exception;
 use App\Entity\Book;
@@ -14,6 +14,7 @@ use App\Repository\ThemeRepository;
 use App\Repository\AuthorRepository;
 use App\Repository\CollecRepository;
 use App\Repository\PublisherRepository;
+use App\Service\DataService;
 use App\Service\ResponseManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,6 +46,8 @@ class BookController extends AbstractController
         return $this->rm->sendJSON($book);
     }
 
+    
+
     #[Route('/new', name: 'book.new', methods:['POST'])]
     public function new(Request $req, BookRepository $repo, AuthorRepository $authorRepo, PublisherRepository $publisherRepo, CollecRepository $collecRepo, ThemeRepository $themeRepo, EntityManagerInterface $em): Response
     {
@@ -59,7 +62,7 @@ class BookController extends AbstractController
 
         $book = new Book();
         $book->setTitle($data['title']);
-        if($data['author']['id'] == 0){
+        if($data['author']['id'] === 0){
             $author = new Author();
             $author->setName($data['author']['name']);
             $author->setFirstname($data['author']['firstname']);
@@ -72,7 +75,7 @@ class BookController extends AbstractController
 
         $book->setAuthor($author);
 
-        if($data['publisher']['id'] == 0){
+        if($data['publisher']['id'] === 0){
             $publisher = new Publisher();
             $publisher->setName($data['publisher']['name']);
 
@@ -84,11 +87,10 @@ class BookController extends AbstractController
 
         $book->setPublisher($publisher);
 
-        if($data['collection']['id'] == 0){
+        if($data['collection']['id'] === 0){
             $collection = new Collec();
             $collection->setName($data['collection']['name']);
             $collection->setPublisher($publisher);
-
             $em->persist($collection);
             $em->flush();
         }else{

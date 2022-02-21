@@ -19,25 +19,23 @@
     <body>
     <div id="root">
         <header class="header">
-        <h2>Biblio</h2>
-        <div class="navigation">
-            <a href="{{ path('home') }}">Acceuil</a>
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('gestion', { 'entity': "home" }) }}">Gestion</a>
-            {% endif %}
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="{{ path('parcourir') }}">Parcourir les livres</a>
-            {% endif %}
-            <a href="/about">A propos</a>
-
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="{{ path('logout') }}"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</a>
-            {% else %}
-                <a href="{{ path('login') }}"><i class="fa-solid fa-right-to-bracket"></i>Connexion</a>
-            {% endif %}
-        </div>
-        <i class="fas fa-bars burger"></i>
-    </header>
+            <h2>Biblio</h2>
+            <div class="navigation">
+                <a class="{% if app.request.attributes.get('_route') == 'home' %}active{% endif %}" href="{{ path('home') }}">Acceuil</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="{% if app.request.attributes.get('_route') == 'gestion' %}active{% endif %}" href="{{ path('gestion', { 'entity': "home" }) }}">Gestion</a>
+                {% endif %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a class="{% if app.request.attributes.get('_route') == 'parcourir' %}active{% endif %}" href="{{ path('parcourir') }}">Parcourir les livres</a>
+                {% endif %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a class="{% if app.request.attributes.get('_route') == 'logout' %}active{% endif %}" href="{{ path('logout') }}"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</a>
+                {% else %}
+                    <a class="{% if app.request.attributes.get('_route') == 'login' %}active{% endif %}" href="{{ path('login') }}"><i class="fa-solid fa-right-to-bracket"></i>Connexion</a>
+                {% endif %}
+            </div>
+            <i class="fas fa-bars burger"></i>
+        </header>
         {% block body %}{% endblock %}
     </div>
     </body>

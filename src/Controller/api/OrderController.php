@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\api;
+namespace App\Controller\Api;
 
 use Exception;
 use App\Entity\Loan;
@@ -12,6 +12,7 @@ use Symfony\Component\Mime\Email;
 use App\Repository\BookRepository;
 use App\Repository\UserRepository;
 use App\Repository\OrderRepository;
+use App\Service\DataService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -44,29 +45,39 @@ class OrderController extends AbstractController
         $orders = $repo->searchOrders($reqData);
         return $this->rm->sendJSON($orders);
     }
-    #[Route('/api/order/process/{id}', name: 'order.process')]
+
+    #[Route('/api/order/out/{id}', name: 'order.out')]
     public function process(Order $order): Response{
         try{
-            $loans = $order->getLoans();
-            foreach ($loans as $loan) {
-                $loan->setStatus('processed');
-            }
-            $order->setStatus('processed');
-            $this->em->flush();
+            $this->setOrderStatus($order, 'out');
             return $this->rm->updateResponse('update');
         }catch(Exception $err){
             return $this->rm->updateResponse('update', $err);
         }
     }
+
+    private function setOrderStatus(Order $order, string $status){
+        $loans = $order->getLoans();
+        foreach ($loans as $loan) {
+            $loan->setStatus($status);
+        }
+        $order->setStatus($status);
+        $this->em->flush();
+    }
+
     #[Route('/api/order/return/{id}', name: 'order.return')]
     public function returnOrder(Order $order){
         try{
-            $loans = $order->getLoans();
-            foreach ($loans as $loan) {
-                $loan->setStatus('ended');
-            }
-            $order->setStatus('ended');
-            $this->em->flush();
+            $this->setOrderStatus($order, 'ended');
+            return $this->rm->updateResponse('update');
+        }catch(Exception $err){
+            return $this->rm->updateResponse('update', $err);
+        }
+    }
+    #[Route('/api/order/cancel/{id}', name: 'order.cancel')]
+    public function cancelOrder(Order $order){
+        try{
+            $this->setOrderStatus($order, 'cancelled');
             return $this->rm->updateResponse('update');
         }catch(Exception $err){
             return $this->rm->updateResponse('update', $err);
@@ -78,6 +89,12 @@ class OrderController extends AbstractController
     {
         $data = $req->toArray();
         $books = $data['books'];
+        foreach ($books as $book) {
+            if(!$book->isAvailable()){
+                $debugMessage = "Ce livre n'est plus disponible: " . $book['title'] . ' - ' . $book['author']['firstname'] . ' ' . $book['author']['name'];
+                return $this->rm->updateResponse('newOrder', new Exception($debugMessage));
+            }
+        }
         $userId = $data['user']['id'];
         $now = new DateTimeImmutable('now');
         $data['date'] = $now->format('Y-m-d');
@@ -104,7 +121,7 @@ class OrderController extends AbstractController
             }
             $this->sendMail($user, $data);
             return $this->rm->newOrderResponse(true);
-        }catch(Exception $e){
+        } catch(Exception $e){
             return $this->rm->newOrderResponse(false, $e);
         }
     }

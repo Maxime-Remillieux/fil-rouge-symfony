@@ -71,7 +71,7 @@ const UserForm = ({ onSubmit }) => {
                     <span>
                         <label htmlFor="role">Role</label>
                         <select id="role" {...register('role')}>
-                            <option value="ROLE_USER">Étudiant</option>
+                            <option value="ROLE_STUDENT">Étudiant</option>
                             <option value="ROLE_PROF">Professeur</option>
                         </select>
                     </span>
