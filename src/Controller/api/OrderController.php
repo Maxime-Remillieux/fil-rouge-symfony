@@ -90,7 +90,8 @@ class OrderController extends AbstractController
         $data = $req->toArray();
         $books = $data['books'];
         foreach ($books as $book) {
-            if(!$book->isAvailable()){
+            $bookEntity = $bookRepo->find($book['id']);
+            if(!$bookEntity->isAvailable()){
                 $debugMessage = "Ce livre n'est plus disponible: " . $book['title'] . ' - ' . $book['author']['firstname'] . ' ' . $book['author']['name'];
                 return $this->rm->updateResponse('newOrder', new Exception($debugMessage));
             }

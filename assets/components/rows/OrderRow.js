@@ -24,7 +24,7 @@ const OrderRow = (props) => {
     }
 
     const handleOrderProcess = async () => {
-        const response = await axios.get('http://localhost:8000/api/order/process/' + data.id);
+        const response = await axios.get('http://localhost:8000/api/order/out/' + data.id);
         alert(response.data.message);
         setIsUpdating(true);
     }
@@ -70,11 +70,13 @@ const OrderRow = (props) => {
                     </div>
                     <ul className="links">
                         <li className='navButton'><a href="#">Modifer<MdEditNote size="20px"/></a></li>
-                        <li className='navButton'><a href="#">Annuler<ImCross /></a></li>
+                        { data.status === 'reserved' &&
+                            <li className='navButton'><a href="#">Annuler<ImCross /></a></li>
+                        }
                         { data.status === 'reserved' &&
                             <li className='navButton' onClick={handleOrderProcess}><div className='link'>Commande traitée</div></li>
                         }
-                        { data.status === 'processed' &&
+                        { data.status === 'out' &&
                             <li className='navButton' onClick={handleOrderReturn}><div className='link'>Retour commande</div></li>
                         }
                     </ul>
